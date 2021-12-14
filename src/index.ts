@@ -2,6 +2,7 @@ import express from 'express';
 import path from 'path';
 import swaggerUi from 'swagger-ui-express';
 import swaggerDocument from './swagger';
+require('dotenv').config();
 
 import actorRouter from './routes/actor.route';
 

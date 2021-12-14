@@ -1,8 +1,7 @@
 import * as Joi from 'joi';
 
-export const get = Joi.object({
+export const movies = Joi.object({
   query: Joi.object({
-    foo: Joi.number().required(),
-    bar: Joi.number().required(),
+    query: Joi.string().required(),
   }),
 }).unknown(true);

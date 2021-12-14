@@ -6,6 +6,6 @@ import { ActorController } from '../controllers';
 
 const actorRouter = Router();
 
-actorRouter.get('/', Validator.validate(ActorSchema.get), ActorController.get);
+actorRouter.get('/movies', Validator.validate(ActorSchema.movies), ActorController.movies);
 
 export default actorRouter;

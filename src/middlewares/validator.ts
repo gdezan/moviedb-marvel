@@ -7,7 +7,6 @@ export default class Validator {
   static validate(schema: Joi.Schema) {
     return (req: Request, res: Response, next: NextFunction) => {
       const { error } = schema.validate(req, { abortEarly: false });
-      console.log({ error });
 
       if (!error) {
         next();
