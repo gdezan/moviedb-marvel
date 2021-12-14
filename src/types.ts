@@ -10,6 +10,20 @@ export interface MovieAsCast extends Movie {
   character: string;
 }
 
+export interface Actor {
+  externalId: number;
+  name: string;
+}
+
+export interface ActorSummary {
+  movies: MovieAsCast[];
+  characters: string[];
+  differentCharacters: number;
+  moviesPlayed: number;
+  name: string;
+  externalId: number;
+}
+
 export interface MovieDBMovie {
   adult: boolean;
   backdrop_path: 'string';

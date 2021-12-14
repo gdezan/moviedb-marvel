@@ -33,7 +33,7 @@ export default class MovieDBService implements IActorService {
     return (await axios.get(`${this.baseURL}${this.injectApiKey(url)}`)).data;
   }
 
-  public async getActorId(query: string): Promise<number | null> {
+  public async getActor(query: string) {
     const params = new URLSearchParams({
       query,
     });
@@ -43,7 +43,8 @@ export default class MovieDBService implements IActorService {
     );
     if (searchResults.total_results === 0) return null;
 
-    return searchResults.results[0].id;
+    const firstResult = searchResults.results[0];
+    return { externalId: firstResult.id, name: firstResult.name };
   }
 
   public async getMoviesFromActor(actorId: number) {
