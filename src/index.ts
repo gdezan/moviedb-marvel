@@ -19,10 +19,10 @@ async function startApp() {
   app.use(express.urlencoded({ extended: false }));
   app.use(express.static(path.join(__dirname, 'public')));
 
-  app.use(errorHandler);
-
   // Routes
   app.use('/actor', actorRouter);
+
+  app.use(errorHandler);
 
   // Server Init
   app.listen(PORT, () => {
