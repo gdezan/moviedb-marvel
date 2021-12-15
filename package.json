@@ -6,7 +6,7 @@
     "build": "tsc",
     "lint": "eslint \"src/**/*.{js,ts}\" --quiet --fix",
     "dev": "nodemon src/index.ts",
-    "start": "yarn run build &&  node dist/index.js",
+    "start": "yarn run build && node dist/index.js",
     "test": "jest --runInBand --verbose --passWithNoTests --collect-coverage"
   },
   "dependencies": {
