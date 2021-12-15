@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { compareTwoStrings } from 'string-similarity';
 
 import { MovieDBService } from '../services';
-import { Actor, ActorSummary, MovieAsCast } from '../types';
+import { Actor, ActorSummary, CharacterActors, MovieAsCast } from '../types';
 import ApiError from '../utils/ApiError';
 export default class ActorController {
   movieDB: MovieDBService;
@@ -81,7 +81,7 @@ export default class ActorController {
     };
   }
 
-  private buildCommonActorsPerCharacter(actorSummaries: ActorSummary[]): Record<string, string[]> {
+  private buildCommonActorsPerCharacter(actorSummaries: ActorSummary[]): CharacterActors[] {
     const actorsPerCharacter: Record<string, Set<string>> = {};
     actorSummaries.forEach((actorSummary) => {
       actorSummary.characters.forEach((char) => {
@@ -96,12 +96,15 @@ export default class ActorController {
       });
     });
 
-    const commonActorsPerCharacter: Record<string, string[]> = {};
-    Object.entries(actorsPerCharacter).forEach(([char, actors]) => {
+    const characterActors: CharacterActors[] = [];
+    Object.entries(actorsPerCharacter).forEach(([character, actors]) => {
       if (actors.size >= 2) {
-        commonActorsPerCharacter[char] = Array.from(actors);
+        characterActors.push({
+          character,
+          actors: Array.from(actors),
+        });
       }
     });
-    return commonActorsPerCharacter;
+    return characterActors;
   }
 }

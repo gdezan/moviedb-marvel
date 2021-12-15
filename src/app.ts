@@ -11,7 +11,7 @@ import { errorHandler } from './middlewares';
 const app = express();
 
 // Swagger
-app.use('/swagger', swaggerUi.serveFiles(swaggerDocument), swaggerUi.setup(swaggerDocument));
+app.use('/docs', swaggerUi.serveFiles(swaggerDocument), swaggerUi.setup(swaggerDocument));
 
 // Middlewares
 app.use(express.json());

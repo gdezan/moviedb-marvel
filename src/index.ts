@@ -1,7 +1,7 @@
 import express from 'express';
 import app from './app';
 
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 8080;
 
 async function startApp() {
   // Server Init

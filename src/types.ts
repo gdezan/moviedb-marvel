@@ -24,6 +24,11 @@ export interface ActorSummary {
   externalId: number;
 }
 
+export interface CharacterActors {
+  character: string;
+  actors: string[];
+}
+
 export interface MovieDBMovie {
   adult: boolean;
   backdrop_path: string;
