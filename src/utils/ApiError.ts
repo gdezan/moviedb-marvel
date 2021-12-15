@@ -15,8 +15,4 @@ export default class ApiError extends Error {
 
     return new ApiError(422, detailsList.join(' - '));
   }
-
-  static internal(message: string) {
-    return new ApiError(500, message);
-  }
 }

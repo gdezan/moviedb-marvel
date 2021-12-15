@@ -14,19 +14,22 @@ export default class MovieDBService implements IActorService {
   apiKey: string;
   marvelMovieIds: Set<number>;
 
-  constructor() {
-    if (!process.env.MOVIEDB_API_URL || !process.env.MOVIEDB_API_KEY) {
+  constructor(apiUrl: string, apiKey: string) {
+    if (!apiUrl || apiUrl.length === 0 || !apiKey || apiKey.length === 0) {
       throw new Error('Missing MovieDB environment');
     }
 
-    this.baseURL = process.env.MOVIEDB_API_URL;
-    this.apiKey = process.env.MOVIEDB_API_KEY;
+    this.baseURL = apiUrl;
+    this.apiKey = apiKey;
     this.marvelMovieIds = new Set(Object.values(MARVEL_MOVIES));
   }
 
   private injectApiKey(url: string): string {
     const [baseUrl, queryString] = url.split('?');
-    return `${baseUrl}?${queryString}&api_key=${this.apiKey}`;
+    if (queryString?.length > 0) {
+      return `${baseUrl}?${queryString}&api_key=${this.apiKey}`;
+    }
+    return `${baseUrl}?api_key=${this.apiKey}`;
   }
 
   private async get(url: string) {
@@ -44,7 +47,7 @@ export default class MovieDBService implements IActorService {
     if (searchResults.total_results === 0) return null;
 
     const firstResult = searchResults.results[0];
-    return { externalId: firstResult.id, name: firstResult.name };
+    return { externalId: firstResult.id, name: firstResult?.name };
   }
 
   public async getMoviesFromActor(actorId: number) {

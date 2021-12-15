@@ -7,7 +7,7 @@
     "lint": "eslint \"src/**/*.{js,ts}\" --quiet --fix",
     "dev": "nodemon src/index.ts",
     "start": "yarn run build &&  node dist/index.js",
-    "test": "NODE_ENV=test jest --runInBand --verbose --passWithNoTests --collect-coverage"
+    "test": "jest --runInBand --verbose --passWithNoTests --collect-coverage"
   },
   "dependencies": {
     "axios": "^0.24.0",
@@ -55,6 +55,7 @@
     ],
     "collectCoverageFrom": [
       "src/**",
+      "!src/index.ts",
       "!**/tests/**",
       "!**/**test**",
       "!**/middlewares/**"
@@ -62,6 +63,12 @@
     "testPathIgnorePatterns": [
       "/.imagine/",
       "<rootDir>/dist/"
+    ],
+    "setupFiles": [
+      "<rootDir>/src/tests/setEnv.ts"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/src/tests/setup.ts"
     ]
   }
 }

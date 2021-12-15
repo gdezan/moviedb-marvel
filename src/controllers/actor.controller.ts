@@ -8,14 +8,17 @@ export default class ActorController {
   movieDB: MovieDBService;
 
   constructor() {
-    this.movieDB = new MovieDBService();
+    this.movieDB = new MovieDBService(
+      process.env.MOVIEDB_API_URL as string,
+      process.env.MOVIEDB_API_KEY as string,
+    );
   }
 
   public async getSummary(req: Request, res: Response, next: NextFunction) {
     const { query } = req.query;
 
     try {
-      const result = await this.getActorSummaryFromQuery(query?.toString() ?? '');
+      const result = await this.getActorSummaryFromQuery(query as string);
       res.status(200).json(result);
     } catch (error) {
       next(error);
@@ -45,7 +48,7 @@ export default class ActorController {
   private async getActorSummaryFromQuery(query: string): Promise<ActorSummary> {
     let actor: Actor | null;
     try {
-      actor = await this.movieDB.getActor(query?.toString() ?? '');
+      actor = await this.movieDB.getActor(query);
     } catch (error) {
       console.error("Error while fetching the actor's id");
       throw error;

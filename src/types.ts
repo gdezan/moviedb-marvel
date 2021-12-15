@@ -26,7 +26,7 @@ export interface ActorSummary {
 
 export interface MovieDBMovie {
   adult: boolean;
-  backdrop_path: 'string';
+  backdrop_path: string;
   genre_ids: number[];
   id: number;
   media_type: string;
