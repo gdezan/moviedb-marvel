@@ -1,4 +1,4 @@
-# Vi Backend Engineer Assignment
+# Marvel Movies and MovieDB's API
 
 ## Running
 
